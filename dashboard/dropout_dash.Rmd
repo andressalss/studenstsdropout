@@ -1,0 +1,241 @@
+---
+title: "Dropout in bachelor courses on Statistics"
+knit: (function(input_file, encoding) {
+  out_dir <- 'docs';
+  rmarkdown::render(input_file,
+ encoding=encoding,
+ output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+# library(plotly)
+library(tidyverse)
+library(brazilmaps)
+library(RColorBrewer)
+library(leaflet)
+# library(gridExtra)
+library(kableExtra)
+#library(GADMTools)
+# library(egg)
+library(readxl)
+library(sf)
+library(geobr)
+evasao <- read_excel("dropout_data.xlsx")
+
+dados<- evasao %>%
+  group_by(STATE) %>%
+  summarise(n=n(), evasao=sum(evadido),alunos=sum(total),tx=evasao/alunos*100,tx_estado=round(tx,2)) %>% 
+  ungroup() %>% 
+  mutate(NO_IES= c("Fundação Universidade Federal de Rondônia",
+         "Universidade Federal do Amazonas",
+         "Universidade Federal do Para",
+         "Universidade Federal do Piauí",
+         "Universidade Federal do Ceara",
+         "Universidade Federal do Rio Grande do Norte",
+         paste("Universidade Estadual da Paraíba,", "<br/>",
+               "Universidade Federal da Paraíba", #"<br/>",
+               "e", "<br/>",
+               "Universidade Federal de Campina Grande"),
+         "Universidade Federal de Pernambuco",
+         "Universidade Federal de Sergipe",
+         "Universidade Federal da Bahia",
+         paste("Universidade Federal de Juiz de Fora,", "<br/>",
+               "Universidade Federal de Minas Gerais,", "<br/>",
+               "Universidade Federal de Uberlândia", #"<br/>",
+               "e", "<br/>",
+               "Universidade Federal de Ouro Preto"),
+         "Universidade Federal do Espirito Santo",
+         paste("Universidade Federal do Rio de Janeiro,", "<br/>",
+               "Universidade do Estado do Rio de Janeiro,", "<br/>",
+               "Universidade Federal Fluminense",# "<br/>",
+               "e", "<br/>",
+               "Escola Nacional de Ciências Estatísticas"), 
+         paste("Universidade de São Paulo,", "<br/>",
+               "Universidade Estadual Paulista Júlio de Mesquita Filho,", "<br/>",
+               "Universidade Estadual de Campinas,", "<br/>",
+               "Centro Universitário Capital", #"<br/>",
+               "e", "<br/>",
+               "Universidade Federal de São Carlos"),
+         paste("Universidade Federal do Parana", #"<br/>",
+               "e", "<br/>",
+               "Universidade Estadual de Maringá"),
+         paste("Universidade Federal do Rio Grande do Sul", #"<br/>",
+               "e", "<br/>",
+               "Universidade Federal de Santa Maria"),
+         "Universidade Federal de Mato Grosso",
+         "Universidade Federal de Goiás",
+         "Universidade De Brasília")
+)
+
+dados<- read_state(year = 2019) %>%  
+  left_join(dados, c("code_state" = "STATE")) %>% 
+  mutate(tx_estado = as.character(tx_estado))
+
+dados <- dados %>%   
+replace_na(list(n=0,alunos=0,tx_estado="No statistics course")) 
+
+my_orange = brewer.pal(n = 9, "YlOrRd")
+
+```
+
+# Cursos
+
+## Row
+
+### students who entered university between 2009 and 2014
+
+```{r}
+valueBox(value = sum(evasao$total),
+         color = my_orange[4]
+         #icon = "glyphicon-ok"
+         )
+```
+
+### studying or with a suspended enrollment (in 2017)
+
+```{r}
+valueBox(value = sum(evasao$cursando)+sum(evasao$trancado),
+         color = my_orange[5],
+         icon = "fa-pencil"
+         )
+```
+
+### graduated by 2017
+
+```{r}
+valueBox(value = sum(evasao$formado),
+         color = my_orange[6],
+         icon="fa-thumbs-up"
+         )
+```
+
+### evaded between 2009 and 2017
+
+```{r}
+#usar o dconfirmed pq o dados remove
+valueBox(value = sum(evasao$evadido),
+         color = my_orange[7],
+         icon="fa-thumbs-down"
+         )
+```
+
+## Row
+
+### Higher Education Institutions with Statistics courses by State
+
+```{r}
+pal.state <- colorFactor(palette = my_orange[c(3,5,6,7,8,9)], domain = dados$n)
+mytext<- paste(
+  dados$nome,"<br/>", 
+  "Number of Higher Education Institutions: ", dados$n, "<br/>", 
+  "State dropout rate (%): ",dados$tx_estado, "<br/>",
+  "Name of Higher Education Institution: ", dados$NO_IES,
+  sep="") %>%
+  lapply(htmltools::HTML)
+
+m<-leaflet(dados) %>% 
+  addTiles() %>% 
+  # setView( lat=-30.5, lng=-53 , zoom=6) %>%
+  addPolygons(color = "#444444", weight = .05, smoothFactor = 0.5,
+              opacity = 1.0, fillOpacity = 0.5,
+              fillColor =  ~pal.state(n),
+              label = mytext,
+              highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE)
+  ) %>%
+  addLegend("bottomright",
+            pal = pal.state,
+            values = ~n,
+            title = "Number of Higher Education Institution: ",
+            opacity = 1
+  )
+m
+```
+
+### Dropout rates by State
+
+```{r}
+pal.state <- colorBin(palette = my_orange[4:9], domain = dados$tx,na.color = my_orange[1],bins=4)
+
+mytext<- paste(
+  dados$nome,"<br/>",
+  "State dropout rate (%): ",dados$tx_estado, "<br/>",
+  "Number of Higher Education Institution: ", dados$n, "<br/>", 
+  sep="") %>%
+  lapply(htmltools::HTML)
+
+m<-leaflet(dados) %>% 
+  addTiles() %>% 
+  addPolygons(color = "#444444", weight = .05, smoothFactor = 0.5,
+              opacity = 1.0, fillOpacity = 0.5,
+              fillColor =  ~pal.state(tx),
+              label = mytext,
+              highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE)
+  ) %>%
+  addLegend("bottomright",
+            pal = pal.state,
+            values = ~tx,
+            title = "Droupout rates (%)",
+            na.label = "No course registered",
+            opacity = 1
+  )
+m
+```
+
+## Row
+
+### Dropout rate
+
+```{r}
+taxas<- evasao %>%
+  mutate(Ranking = 1:33,
+         Evasão = round(evadido/total*100,2),
+         Formação = round(formado/total*100,2),
+         Censura = round((cursando+trancado)/total*100,2)
+         ) %>%
+  select(Ranking,IES,Evasão, Formação, Censura)
+
+kable(taxas, align = "c",
+      caption = "Dropout, graduation and censorship rates among students of Statistics courses according to Higher Education Institution in ascending order of dropout (%).",
+      col.names = c("Ranking","Higher Education Institution","Dropout", "Graduation", "Attending or suspended")) %>%
+  kable_styling(c("striped"), full_width = F)
+```
+
+### Number of students
+
+```{r}
+QT <- evasao %>%
+  mutate(Censura = (cursando+trancado)) %>%
+  select(IES,evadido, formado, Censura, total)
+
+kable(QT, align = "c",
+      caption = "Number of Statistics students according to the Higher Education Institution and the situation at the end of the study.",
+      col.names = c("Higher Education Institution","Dropout", "Graduation", "Attending or suspended", "Total")) %>%
+  kable_styling(c("striped"), full_width = F)
+```
+
+# About
+
+**The application**
+
+The purpose of this application is to facilitate the visualization of the geographical distribution of dropout rates in Statistics courses, considering admissions between 2009 and 2014. Interactive maps are presented containing information on the number of Higher Education Institutions and dropout rates by State. In addition, a complete list of institutions offering the aforementioned courses and a dropout ranking is available. This application is one of the results of the article entitled ''Models of statistical learning to predict dropout in higher education courses in statistics in Brazil'', which was submitted in the magazine Gestão & Produção - ISSN: 0104-530X (Print) and 1806- 9649 (Online).
+
+**Data source**
+
+The data come from the Census of Higher Education, which is annually hold by INEP (National Institute of Educational Studies and Research) (Brazil, 2019) and are available at <http://portal.inep.gov.br/basica-levantamentos-acessar>.
+
+The target public was the students who entered, between 2009 and 2014, in bachelor's degree in Statistics, in Brazil, which are followed in the following Census, until 2017.The latest date for ingress (2014) was defined considering a timely manner for the course completion.
+
+The students were classified in three categories:
+
+1)  Drop Out: students whose last enrollment is under the situation "disconnected from the course" or "transferred to another course from the same IES".
+
+2)  Graduated: students who concluded graduation.
+
+3)  Censorship: students whose last enrollment is under the situation "dead", "withdrawn enrollment", "probable undergraduate" or "coursing".
+
+The following up is done through the unique identification code which is generated by INEP and made available in the database from the Census.
