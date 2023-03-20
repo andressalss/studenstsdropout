@@ -1,5 +1,5 @@
 ---
-title: "Dropout in bachelor courses on Statistics"
+title: "Dropout in Bachelors Programs in Statistics"
 knit: (function(input_file, encoding) {
   out_dir <- 'docs';
   rmarkdown::render(input_file,
@@ -83,7 +83,7 @@ my_orange = brewer.pal(n = 9, "YlOrRd")
 
 ```
 
-# Cursos
+# Bachelors Programs
 
 ## Row
 
