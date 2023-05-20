@@ -39,15 +39,14 @@ shift <- ggplot(dados_transformados, na.rm = TRUE) +
 shift
 ggsave("shift_plot.pdf", shift,width = 6, height=3)
 
-
-gender <- ggplot(dados_transformados) +
+sex <- ggplot(dados_transformados) +
   aes(x = SEXO_ALUNO, fill = CO_ALUNO_SITUACAO) +
   geom_bar(position = "fill") +
   scale_fill_brewer(palette = "YlOrRd",direction = -1)+
-  labs(x = "GENDER", y = "PROPORTION OF STUDENTS", fill = NULL) +
+  labs(x = "SEX", y = "PROPORTION OF STUDENTS", fill = NULL) +
   theme_minimal()
-gender
-ggsave("gender_plot.pdf", gender,width = 6, height=3)
+sex
+ggsave("sex_plot.pdf", sex,width = 6, height=3)
 
 age <- ggplot(dados_transformados) +
   aes(x = NU_IDADE_ALUNO, fill = CO_ALUNO_SITUACAO) +
