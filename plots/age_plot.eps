@@ -1,0 +1,463 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%DocumentNeededResources: font Times-Roman
+%%+ font Times-Bold
+%%+ font Times-Italic
+%%+ font Times-BoldItalic
+%%+ font Symbol
+%%Title: R Graphics Output
+%%Creator: R Software
+%%Pages: (atend)
+%%BoundingBox: 0 0 432 288
+%%EndComments
+%%BeginProlog
+/bp  { gs sRGB gs } def
+% begin .ps.prolog
+/gs  { gsave } bind def
+/gr  { grestore } bind def
+/ep  { showpage gr gr } bind def
+/m   { moveto } bind def
+/l  { rlineto } bind def
+/np  { newpath } bind def
+/cp  { closepath } bind def
+/f   { fill } bind def
+/o   { stroke } bind def
+/c   { newpath 0 360 arc } bind def
+/r   { 4 2 roll moveto 1 copy 3 -1 roll exch 0 exch rlineto 0 rlineto -1 mul 0 exch rlineto closepath } bind def
+/p1  { stroke } bind def
+/p2  { gsave bg fill grestore newpath } bind def
+/p3  { gsave bg fill grestore stroke } bind def
+/p6  { gsave bg eofill grestore newpath } bind def
+/p7  { gsave bg eofill grestore stroke } bind def
+/t   { 5 -2 roll moveto gsave rotate
+       1 index stringwidth pop
+       mul neg 0 rmoveto show grestore } bind def
+/ta  { 4 -2 roll moveto gsave rotate show } bind def
+/tb  { 2 -1 roll 0 rmoveto show } bind def
+/cl  { grestore gsave newpath 3 index 3 index moveto 1 index
+       4 -1 roll lineto  exch 1 index lineto lineto
+       closepath clip newpath } bind def
+/rgb { setrgbcolor } bind def
+/s   { scalefont setfont } bind def
+% end   .ps.prolog
+/sRGB { [ /CIEBasedABC
+          << /DecodeLMN
+               [ { dup 0.03928 le
+                        {12.92321 div}
+                        {0.055 add 1.055 div 2.4 exp }
+                     ifelse
+                 } bind dup dup
+               ]
+             /MatrixLMN [0.412457 0.212673 0.019334
+                         0.357576 0.715152 0.119192
+                         0.180437 0.072175 0.950301]
+             /WhitePoint [0.9505 1.0 1.0890]
+           >>
+         ] setcolorspace } bind def
+/srgb { setcolor } bind def
+% begin encoding
+/WinAnsiEncoding [
+ /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+ /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+ /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+ /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+ /space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright
+ /parenleft /parenright /asterisk /plus /comma /minus /period /slash
+ /zero /one /two /three /four /five /six /seven
+ /eight /nine /colon /semicolon /less /equal /greater /question
+ /at /A /B /C /D /E /F /G
+ /H /I /J /K /L /M /N /O
+ /P /Q /R /S /T /U /V /W
+ /X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore
+ /grave /a /b /c /d /e /f /g
+ /h /i /j /k /l /m /n /o
+ /p /q /r /s /t /u /v /w
+ /x /y /z /braceleft /bar /braceright /asciitilde /.notdef
+ /Euro /.notdef /quotesinglbase /florin /quotedblbase /ellipsis /dagger /daggerdbl
+ /circumflex /perthousand /Scaron /guilsinglleft /OE /.notdef /Zcaron /.notdef
+ /.notdef /quoteleft /quoteright /quotedblleft /quotedblright /bullet /endash /emdash
+ /tilde /trademark /scaron /guilsinglright /oe /.notdef /zcaron /Ydieresis
+ /space /exclamdown /cent /sterling /currency /yen /brokenbar /section
+ /dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron
+ /degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /periodcentered
+ /cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown
+ /Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla
+ /Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis
+ /Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply
+ /Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls
+ /agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla
+ /egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis
+ /eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide
+ /oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis
+]
+ def
+% end encoding
+%%IncludeResource: font Times-Roman
+/Times-Roman findfont
+dup length dict begin
+  {1 index /FID ne {def} {pop pop} ifelse} forall
+  /Encoding WinAnsiEncoding def
+  currentdict
+  end
+/Font1 exch definefont pop
+%%IncludeResource: font Times-Bold
+/Times-Bold findfont
+dup length dict begin
+  {1 index /FID ne {def} {pop pop} ifelse} forall
+  /Encoding WinAnsiEncoding def
+  currentdict
+  end
+/Font2 exch definefont pop
+%%IncludeResource: font Times-Italic
+/Times-Italic findfont
+dup length dict begin
+  {1 index /FID ne {def} {pop pop} ifelse} forall
+  /Encoding WinAnsiEncoding def
+  currentdict
+  end
+/Font3 exch definefont pop
+%%IncludeResource: font Times-BoldItalic
+/Times-BoldItalic findfont
+dup length dict begin
+  {1 index /FID ne {def} {pop pop} ifelse} forall
+  /Encoding WinAnsiEncoding def
+  currentdict
+  end
+/Font4 exch definefont pop
+%%IncludeResource: font Symbol
+/Symbol findfont
+dup length dict begin
+  {1 index /FID ne {def} {pop pop} ifelse} forall
+  currentdict
+  end
+/Font5 exch definefont pop
+%%EndProlog
+%%Page: 1 1
+bp
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+46.35 40.67 426.52 243.32 cl
+/bg { 1 1 1 srgb } def
+1 1 1 srgb
+1.07 setlinewidth
+[] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
+46.35 40.67 380.17 202.65 r p3
+0.9216 0.9216 0.9216 srgb
+0.53 setlinewidth
+[] 0 setdash
+0 setlinecap
+np
+46.35 70.60 m
+380.17 0 l
+o
+np
+46.35 112.04 m
+380.17 0 l
+o
+np
+46.35 153.47 m
+380.17 0 l
+o
+np
+46.35 194.91 m
+380.17 0 l
+o
+np
+46.35 236.35 m
+380.17 0 l
+o
+np
+159.46 40.67 m
+0 202.65 l
+o
+np
+280.95 40.67 m
+0 202.65 l
+o
+np
+402.43 40.67 m
+0 202.65 l
+o
+1.07 setlinewidth
+[] 0 setdash
+np
+46.35 49.88 m
+380.17 0 l
+o
+np
+46.35 91.32 m
+380.17 0 l
+o
+np
+46.35 132.76 m
+380.17 0 l
+o
+np
+46.35 174.19 m
+380.17 0 l
+o
+np
+46.35 215.63 m
+380.17 0 l
+o
+np
+98.71 40.67 m
+0 202.65 l
+o
+np
+220.20 40.67 m
+0 202.65 l
+o
+np
+341.69 40.67 m
+0 202.65 l
+o
+/bg { 0.9412 0.2314 0.1255 srgb } def
+63.63 49.96 11.52 0.00 r p2
+75.15 78.80 11.52 0.00 r p2
+86.67 100.68 11.52 0.00 r p2
+98.19 172.54 11.52 15.25 r p2
+109.71 197.56 11.52 36.55 r p2
+121.23 158.20 11.52 26.27 r p2
+132.75 117.75 11.52 17.07 r p2
+144.27 100.27 11.52 10.94 r p2
+155.79 83.86 11.52 6.30 r p2
+167.31 73.00 11.52 5.97 r p2
+178.83 71.68 11.52 4.72 r p2
+190.35 56.59 11.52 2.07 r p2
+201.87 60.82 11.52 2.24 r p2
+213.39 59.83 11.52 2.32 r p2
+224.91 57.59 11.52 1.66 r p2
+236.43 55.52 11.52 1.57 r p2
+247.95 55.52 11.52 0.99 r p2
+259.48 53.28 11.52 0.99 r p2
+271.00 53.78 11.52 0.83 r p2
+282.52 52.37 11.52 0.58 r p2
+294.04 51.37 11.52 0.58 r p2
+305.56 50.79 11.52 0.41 r p2
+317.08 51.62 11.52 0.25 r p2
+328.60 50.21 11.52 0.17 r p2
+340.12 50.71 11.52 0.08 r p2
+351.64 50.05 11.52 0.33 r p2
+363.16 49.96 11.52 0.08 r p2
+374.68 50.13 11.52 0.25 r p2
+386.20 49.88 11.52 0.00 r p2
+397.72 49.88 11.52 0.08 r p2
+/bg { 0.9961 0.6980 0.2980 srgb } def
+63.63 49.88 11.52 0.08 r p2
+75.15 49.88 11.52 28.92 r p2
+86.67 49.96 11.52 50.72 r p2
+98.19 62.48 11.52 110.06 r p2
+109.71 105.49 11.52 92.07 r p2
+121.23 91.07 11.52 67.13 r p2
+132.75 69.85 11.52 47.90 r p2
+144.27 60.82 11.52 39.45 r p2
+155.79 55.27 11.52 28.59 r p2
+167.31 52.78 11.52 20.22 r p2
+178.83 52.70 11.52 18.98 r p2
+190.35 50.79 11.52 5.80 r p2
+201.87 51.12 11.52 9.70 r p2
+213.39 51.12 11.52 8.70 r p2
+224.91 50.87 11.52 6.71 r p2
+236.43 50.38 11.52 5.14 r p2
+247.95 50.29 11.52 5.22 r p2
+259.48 50.05 11.52 3.23 r p2
+271.00 50.13 11.52 3.65 r p2
+282.52 50.05 11.52 2.32 r p2
+294.04 50.29 11.52 1.08 r p2
+305.56 49.88 11.52 0.91 r p2
+317.08 50.13 11.52 1.49 r p2
+328.60 49.88 11.52 0.33 r p2
+340.12 50.05 11.52 0.66 r p2
+351.64 49.88 11.52 0.17 r p2
+363.16 49.88 11.52 0.08 r p2
+374.68 49.88 11.52 0.25 r p2
+386.20 49.88 11.52 0.00 r p2
+397.72 49.88 11.52 0.00 r p2
+/bg { 1 0.9294 0.6275 srgb } def
+63.63 49.88 11.52 0.00 r p2
+75.15 49.88 11.52 0.00 r p2
+86.67 49.88 11.52 0.08 r p2
+98.19 49.88 11.52 12.60 r p2
+109.71 49.88 11.52 55.61 r p2
+121.23 49.88 11.52 41.19 r p2
+132.75 49.88 11.52 19.97 r p2
+144.27 49.88 11.52 10.94 r p2
+155.79 49.88 11.52 5.39 r p2
+167.31 49.88 11.52 2.90 r p2
+178.83 49.88 11.52 2.82 r p2
+190.35 49.88 11.52 0.91 r p2
+201.87 49.88 11.52 1.24 r p2
+213.39 49.88 11.52 1.24 r p2
+224.91 49.88 11.52 0.99 r p2
+236.43 49.88 11.52 0.50 r p2
+247.95 49.88 11.52 0.41 r p2
+259.48 49.88 11.52 0.17 r p2
+271.00 49.88 11.52 0.25 r p2
+282.52 49.88 11.52 0.17 r p2
+294.04 49.88 11.52 0.41 r p2
+305.56 49.88 11.52 0.00 r p2
+317.08 49.88 11.52 0.25 r p2
+328.60 49.88 11.52 0.00 r p2
+340.12 49.88 11.52 0.17 r p2
+351.64 49.88 11.52 0.00 r p2
+363.16 49.88 11.52 0.00 r p2
+374.68 49.88 11.52 0.00 r p2
+386.20 49.88 11.52 0.00 r p2
+397.72 49.88 11.52 0.00 r p2
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+/Font1 findfont 9 s
+0.3020 0.3020 0.3020 srgb
+41.42 46.90 (0) 1 0 t
+41.42 88.34 (500) 1 0 t
+41.42 129.78 (1000) 1 0 t
+41.42 171.21 (1500) 1 0 t
+41.42 212.65 (2000) 1 0 t
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+/Font1 findfont 14 s
+0.2510 0.2510 0.2510 srgb
+98.71 26.47 (20) .5 0 t
+220.20 26.47 (40) .5 0 t
+341.69 26.47 (60) .5 0 t
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+/Font2 findfont 17 s
+0.2510 0.2510 0.2510 srgb
+218.02 9.19 (A) 0 ta
+-0.935 (GE) tb gr
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+/Font2 findfont 17 s
+0.2510 0.2510 0.2510 srgb
+16.97 142.00 (NUMBER OF STUDENS) .5 90 t
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+/bg { 0.9412 0.2314 0.1255 srgb } def
+82.13 260.47 15.86 15.86 r p2
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+/bg { 0.9961 0.6980 0.2980 srgb } def
+201.38 260.47 15.86 15.86 r p2
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+/bg { 1 0.9294 0.6275 srgb } def
+286.84 260.47 15.86 15.86 r p2
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+/Font2 findfont 14 s
+0 0 0 srgb
+104.18 263.67 (CENSORSHIP) 0 0 t
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+/Font2 findfont 14 s
+0 0 0 srgb
+223.43 263.67 (EV) 0 ta
+-1.890 (ADED) tb gr
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+/Font2 findfont 14 s
+0 0 0 srgb
+308.89 263.67 (GRADU) 0 ta
+-0.840 (A) tb
+-1.330 (TED) tb gr
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+0.00 0.00 432.00 288.00 cl
+ep
+%%Trailer
+%%Pages: 1
+%%EOF

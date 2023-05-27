@@ -21,49 +21,137 @@ dados_transformados <- dados %>%
                                    ifelse(CO_COR_RACA_ALUNO==2,"PRETA",
                                           ifelse(CO_COR_RACA_ALUNO==3,"PARDA",
                                                  ifelse(CO_COR_RACA_ALUNO==4,"AMARELA","INDIGENA"))))),
-         SEXO_ALUNO=(ifelse(IN_SEXO_ALUNO==0,"MALE","FEMALE"))) %>% 
+         SEXO_ALUNO=(ifelse(IN_SEXO_ALUNO==1,"MALE","FEMALE"))) %>% 
   drop_na(CO_TURNO_ALUNO)
 
 attach(dados_transformados)
 
-g_turno <- ggplot(data = dados_transformados, aes(CO_TURNO_ALUNO, na.rm = TRUE)) +
-  geom_bar(aes(fill = CO_ALUNO_SITUACAO), position = "fill") +
-  theme_minimal()
 
+# SHIFT PLOT --------------------------------------------------------------
 shift <- ggplot(dados_transformados, na.rm = TRUE) +
  aes(x = CO_TURNO_ALUNO, fill = CO_ALUNO_SITUACAO) +
  geom_bar(position = "fill") +
   scale_fill_brewer(palette = "YlOrRd",direction = -1)+
  labs(x = "SHIFT", y = "PROPORTION OF STUDENTS", fill = NULL) +
- theme_minimal()
+ theme_minimal()+
+  theme(legend.position = "top",
+        strip.text = element_text(face="bold",size=15),
+        plot.title = element_text(face="bold",size=15),
+        legend.text = element_text(face="bold",size=14),
+        axis.title.y = element_text(face="bold", color="grey25",
+                                    size=17),
+        axis.title.x = element_text(face="bold", color="grey25",
+                                    size=17),
+        axis.text.x = element_text(color="grey25",
+                                   size=14),
+        axis.text.y.right = element_text(color="grey25",
+                                         size=15),
+        panel.background = element_rect(fill = "white", colour = "white"))
 shift
-ggsave("shift_plot.pdf", shift,width = 6, height=3)
 
+
+# EPS 
+setEPS()
+postscript("shift_plot.eps",width = 6, height = 4,family = "Times")
+shift
+dev.off()
+
+# PDF
+ggsave("shift_plot.pdf", shift,width = 6, height=3,family = "Times")
+
+
+# SEX PLOT  ---------------------------------------------------------------
 sex <- ggplot(dados_transformados) +
   aes(x = SEXO_ALUNO, fill = CO_ALUNO_SITUACAO) +
   geom_bar(position = "fill") +
   scale_fill_brewer(palette = "YlOrRd",direction = -1)+
   labs(x = "SEX", y = "PROPORTION OF STUDENTS", fill = NULL) +
-  theme_minimal()
+  theme_minimal()+
+  theme(legend.position = "top",
+        strip.text = element_text(face="bold",size=15),
+        plot.title = element_text(face="bold",size=15),
+        legend.text = element_text(face="bold",size=14),
+        axis.title.y = element_text(face="bold", color="grey25",
+                                    size=17),
+        axis.title.x = element_text(face="bold", color="grey25",
+                                    size=17),
+        axis.text.x = element_text(color="grey25",
+                                   size=14),
+        axis.text.y.right = element_text(color="grey25",
+                                         size=15),
+        panel.background = element_rect(fill = "white", colour = "white"))
 sex
-ggsave("sex_plot.pdf", sex,width = 6, height=3)
 
+#EPS
+setEPS()
+postscript("sex_plot.eps",width = 6, height = 4,family = "Times")
+sex
+dev.off()
+
+# PDF
+ggsave("sex_plot.pdf", sex,width = 6, height=3,family = "Times")
+
+
+# AGE PLOT ----------------------------------------------------------------
 age <- ggplot(dados_transformados) +
   aes(x = NU_IDADE_ALUNO, fill = CO_ALUNO_SITUACAO) +
   geom_histogram(bins = 30L) +
   scale_fill_brewer(palette = "YlOrRd", direction = -1)+
   labs(x = "AGE", y = "NUMBER OF STUDENS", fill = NULL)+
-  theme_minimal()
+  theme_minimal()+
+  theme(legend.position = "top",
+        strip.text = element_text(face="bold",size=15),
+        plot.title = element_text(face="bold",size=15),
+        legend.text = element_text(face="bold",size=14),
+        axis.title.y = element_text(face="bold", color="grey25",
+                                    size=17),
+        axis.title.x = element_text(face="bold", color="grey25",
+                                    size=17),
+        axis.text.x = element_text(color="grey25",
+                                   size=14),
+        axis.text.y.right = element_text(color="grey25",
+                                         size=15),
+        panel.background = element_rect(fill = "white", colour = "white"))
 age
-ggsave("age_plot.pdf", age,width = 6, height=3)
+
+# EPS
+setEPS()
+postscript("age_plot.eps",width = 6, height = 4,family = "Times")
+age
+dev.off()
+
+# PDF
+ggsave("age_plot.pdf", age,width = 6, height=3,family = "Times")
 
 
+# SITUATION ---------------------------------------------------------------
 situation <- ggplot(dados_transformados) +
     aes(x = CO_ALUNO_SITUACAO) +
     geom_bar(fill = rev(brewer.pal(3,"YlOrRd"))) +
-    labs(x = NULL, y = "NUMBER OF STUDENTS")+
-    theme_minimal()
+    labs(x = "SITUATION", y = "NUMBER OF STUDENTS")+
+  theme_minimal()+
+  theme(legend.position = "top",
+        strip.text = element_text(face="bold",size=15),
+        plot.title = element_text(face="bold",size=15),
+        legend.text = element_text(face="bold",size=14),
+        axis.title.y = element_text(face="bold", color="grey25",
+                                    size=17),
+        axis.title.x = element_text(face="bold", color="grey25",
+                                    size=17),
+        axis.text.x = element_text(color="grey25",
+                                   size=14),
+        axis.text.y.right = element_text(color="grey25",
+                                         size=15),
+        panel.background = element_rect(fill = "white", colour = "white"))
+
 situation
 
-ggsave("situation_plot.pdf", situation,width = 6, height=3)
+# EPS
+setEPS()
+postscript("situation_plot.eps",width = 6, height = 4,family = "Times")
+situation
+dev.off()
+
+# PDF
+ggsave("situation_plot.pdf", situation,width = 6, height=3,family = "Times")
 
