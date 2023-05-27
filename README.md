@@ -1,7 +1,7 @@
 # Studenst's Dropout
 
 ## The repository
-This repository contains the plots and the dashboard, developed as a visualization tool, for the data used in the paper "Statistical learning models for predicting the dropout outcomes of students in bachelor courses on Statistics, in Brazil" wich will be submited in Expert Systems with Applications, ISSN: 1873-6793.
+This repository contains the plots and the dashboard, developed as a visualization tool, for the data used in the paper "Using machine learning techniques for predicting the dropout of undergraduate students in Brazilian courses of statistics" wich will be submited in Expert Systems with Applications, ISSN: 1873-6793.
 
 ## The dataset
 The data come from the Census of Higher Education, which is annually hold by INEP (National Institute of Educational Studies and Research) (Brazil, 2019) and are available at http://portal.inep.gov.br/basica-levantamentos-acessar.
