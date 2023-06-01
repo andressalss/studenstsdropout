@@ -222,13 +222,13 @@ kable(QT, align = "c",
 
 **The application**
 
-The purpose of this application is to facilitate the visualization of the geographical distribution of dropout rates in Statistics courses, considering admissions between 2009 and 2014. Interactive maps are presented containing information on the number of Higher Education Institutions and dropout rates by State. In addition, a complete list of institutions offering the aforementioned courses and a dropout ranking is available. This application is one of the results of the article entitled ''Models of statistical learning to predict dropout in higher education courses in statistics in Brazil'', which was submitted in the magazine Gestão & Produção - ISSN: 0104-530X (Print) and 1806- 9649 (Online).
+The purpose of this application is to facilitate the visualization of the geographical distribution of dropout rates in Statistics courses, considering admissions between 2009 and 2014. Interactive maps are presented containing information on the number of Higher Education Institutions and dropout rates by State. In addition, a complete list of institutions offering the aforementioned courses and a dropout ranking is available.
 
 **Data source**
 
 The data come from the Census of Higher Education, which is annually hold by INEP (National Institute of Educational Studies and Research) (Brazil, 2019) and are available at <http://portal.inep.gov.br/basica-levantamentos-acessar>.
 
-The target public was the students who entered, between 2009 and 2014, in bachelor's degree in Statistics, in Brazil, which are followed in the following Census, until 2017.The latest date for ingress (2014) was defined considering a timely manner for the course completion.
+The target public was the students who entered, between 2009 and 2014, in bachelor's degree in Statistics, in Brazil, which are followed in the following Census, until 2017. The latest date for ingress (2014) was defined considering a timely manner for the course completion.
 
 The students were classified in three categories:
 
