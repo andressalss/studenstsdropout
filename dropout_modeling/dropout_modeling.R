@@ -156,7 +156,7 @@ confmat.rl <- confusionMatrix(predicted_class, validation_rl$CO_ALUNO_EVASAO)
 # Obter importância das variáveis
 importance.rf <- caret::varImp(fit.rf, scale = TRUE)
 # Visualizar graficamente
-plot(importance.rf, top = 20, main = "Top 20 Variáveis Mais Importantes")
+plot(importance.rf, top = 11, main = "Top 20 Variáveis Mais Importantes")
 
 
 # -----------------------------
@@ -182,11 +182,48 @@ validation_norm <- validation_rf
 training_norm$NU_IDADE_ALUNO <- normalize(training_rf$NU_IDADE_ALUNO)
 validation_norm$NU_IDADE_ALUNO <- normalize(validation_rf$NU_IDADE_ALUNO)
 
-# Modelo SVM
-fit1.svm <- e1071::svm(NO_EVENTO~.,data=training_norm)
+# Controle de treino com validação cruzada de 10 folds
+ctrl <- trainControl(
+  method = "cv",        # cross-validation
+  number = 10,          # 10 folds
+  savePredictions = "final", # salva predições para análise posterior
+  classProbs = TRUE,         # para modelos de classificação
+  summaryFunction = twoClassSummary  # usa métricas como ROC, Sens, Spec
+)
 
-# Predição do conjunto de teste
-pred.svm <- predict(fit1.svm, validation_norm)
+# Modelo SVM com kernel radial
+set.seed(1234)  # para reprodutibilidade
+fit.svm.cv <- train(
+  NO_EVENTO ~ .,
+  data = training_norm,
+  method = "svmRadial",      # ou "svmLinear", "svmPoly"
+  metric = "ROC",            # otimizar AUC, pode trocar por "Accuracy"
+  trControl = ctrl,
+  preProcess = NULL,
+  tuneLength = 5             # número de combinações de hiperparâmetros a tentar
+)
+
+# Resultados da cross-validation
+print(fit.svm.cv)
+plot(fit.svm.cv)
+
+# Predição
+pred.svm <- predict(fit.svm.cv, validation_norm)
 
 # Matriz de confusão
 confusionMatrix(pred.svm, validation_norm$NO_EVENTO)
+
+# Importância das variáveis
+importance.svm <- caret::varImp(fit.svm.caret, scale = TRUE)
+
+# Mostrar tabela de ranking
+importance_table <- importance.svm$importance %>%
+  tibble::rownames_to_column("Variavel") %>%
+  rename(Importancia = 1 + 1) %>%  # ou especifique o nome correto se `value` ou `NO_EVENTO`
+  arrange(desc(Importancia))
+
+print(importance_table)
+
+# Gráfico de importância
+plot(importance.svm, top = 11, main = "Top 11 Variáveis Mais Importantes")
+
