@@ -4,7 +4,7 @@ library(tidyverse)
 library(esquisse)
 library(ggsave)
 library(RColorBrewer)
-
+library(readr)
 dados <- read_delim("BD_ESTUDO.csv",delim = ";", escape_double = FALSE, trim_ws = TRUE)
 dados_transformados <- dados %>% 
   select(CO_ALUNO, CO_ALUNO_SITUACAO, NO_EVENTO, CO_TURNO_ALUNO, IN_SEXO_ALUNO, CO_COR_RACA_ALUNO, NU_IDADE_ALUNO) %>% 
@@ -25,7 +25,7 @@ dados_transformados <- dados %>%
   drop_na(CO_TURNO_ALUNO)
 
 attach(dados_transformados)
-
+table(dados_transformados$NO_EVENTO)
 
 # SHIFT PLOT --------------------------------------------------------------
 shift <- ggplot(dados_transformados, na.rm = TRUE) +
